@@ -17,7 +17,7 @@ CORS_ORIGINS_ENV = os.getenv("CORS_ORIGINS", "")
 if CORS_ORIGINS_ENV:
     CORS_ORIGINS = [origin.strip() for origin in CORS_ORIGINS_ENV.split(",") if origin.strip()]
 else:
-    CORS_ORIGINS = ["*", "https://ezek9292.github.io/Background_Remover/"]
+    CORS_ORIGINS = ["http://127.0.0.1:5500", "https://ezek9292.github.io"]
 
 ALLOWED_CONTENT_TYPES = {"image/png", "image/jpeg", "image/jpg", "image/webp"}
 
@@ -27,7 +27,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["GET", "POST"],
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
