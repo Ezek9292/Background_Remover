@@ -33,15 +33,20 @@ app.add_middleware(
 session = None
 
 
-@app.on_event("startup")
-def load_model() -> None:
-    global session
-    session = new_session("u2net")
-
+@app.get("/")
+def home() -> dict:
+    return {"message": "Background Remover API is running"}
 
 @app.get("/health")
 def health() -> dict:
     return {"ok": True}
+
+def get_session():
+    global session
+    if session is None:
+        print("Loading u2net model...")
+        session = new_session("u2net")
+    return session
 
 
 async def read_upload_with_limit(upload: UploadFile, max_bytes: int) -> bytes:
@@ -92,7 +97,7 @@ async def remove_bg(file: UploadFile = File(...)) -> Response:
     image = ImageOps.exif_transpose(image)
     image = downscale_image(image, MAX_DIMENSION)
 
-    output = remove(image, session=session)
+    output = remove(image, session=get_session())
     if isinstance(output, Image.Image):
         buffer = BytesIO()
         output.save(buffer, format="PNG")
