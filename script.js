@@ -1,5 +1,4 @@
-const API_BASE_URL =
-    "http://localhost:8000";
+"https://background-remover-4u7l.onrender.com";
 
 // DOM Elements
 const elements = {
