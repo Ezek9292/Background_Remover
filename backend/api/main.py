@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from PIL import Image, ImageOps, UnidentifiedImageError
 from rembg import new_session, remove
+# import uvicorn
 
 MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "16"))
 MAX_DIMENSION = int(os.getenv("MAX_DIMENSION", "2000"))
@@ -106,3 +107,11 @@ async def remove_bg(file: UploadFile = File(...)) -> Response:
         output_bytes = output
 
     return Response(content=output_bytes, media_type="image/png")
+
+    if __name__ == "__main__":
+        import uvicorn
+        uvicorn.run(
+            "backend.api.main:app",
+            host="0.0.0.0",
+            port=int(os.environ.get("PORT", 8080)),
+        )
