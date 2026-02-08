@@ -17,7 +17,7 @@ CORS_ORIGINS_ENV = os.getenv("CORS_ORIGINS", "")
 if CORS_ORIGINS_ENV:
     CORS_ORIGINS = [origin.strip() for origin in CORS_ORIGINS_ENV.split(",") if origin.strip()]
 else:
-    CORS_ORIGINS = ["*"]
+    CORS_ORIGINS = ["*", "https://ezek9292.github.io/Background_Remover/"]
 
 ALLOWED_CONTENT_TYPES = {"image/png", "image/jpeg", "image/jpg", "image/webp"}
 
