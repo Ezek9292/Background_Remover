@@ -1,4 +1,4 @@
-"https://background-remover-4u7l.onrender.com";
+const API_BASE_URL = "https://background-remover-4u7l.onrender.com";
 
 // DOM Elements
 const elements = {
